@@ -1,0 +1,33 @@
+# ---------- Python / Backend ----------
+backend/venv/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/.env
+backend/spacecraft.db
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ---------- ML - large binaries, not tracked in git ----------
+# Trained model weights are large binary files - not suited to git.
+# See backend/app/ml/training/README.md for how to regenerate them.
+backend/app/ml/models/*.h5
+backend/app/ml/models/*.pkl
+!backend/app/ml/models/.gitkeep
+
+# Training datasets - real photos, hundreds of MB total. Not suited to git.
+# See backend/app/ml/training/README.md for dataset sources.
+backend/app/ml/training/datasets/**/*.jpg
+backend/app/ml/training/datasets/**/*.jpeg
+backend/app/ml/training/datasets/**/*.png
+!backend/app/ml/training/datasets/**/.gitkeep
+
+# ---------- Node / Frontend ----------
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# ---------- OS / Editor ----------
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
