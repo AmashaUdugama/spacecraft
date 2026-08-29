@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     CORS_ORIGINS: list[str] = [
         "http://localhost:5173",  # Vite dev server
         "http://127.0.0.1:5173",
+        "https://amashaudugama.github.io",  # GitHub Pages - update if your username differs
     ]
 
     class Config:
