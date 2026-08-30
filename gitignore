@@ -21,6 +21,7 @@ backend/app/ml/training/datasets/**/*.jpeg
 backend/app/ml/training/datasets/**/*.png
 !backend/app/ml/training/datasets/**/.gitkeep
 
+
 # ---------- Node / Frontend ----------
 frontend/node_modules/
 frontend/dist/
