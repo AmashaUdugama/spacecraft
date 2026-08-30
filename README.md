@@ -1,193 +1,210 @@
-<div align="center">
+# SpaceCraft
 
-# 📚 Library Management System
-**A Modern Web-Based Solution for Digital Library Operations**
+**ML-Based Personalized Interior Design and Space Optimization System**
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=2563EB&center=true&vCenter=true&width=435&lines=Welcome+to+Library+Management;Multi-Role+Access+System;Built+with+PHP+%26+Tailwind;Fast+%26+Efficient+Operations" alt="Typing SVG" />
+SpaceCraft analyzes a photograph of an existing room and generates personalized interior design recommendations grounded in genuine spatial analysis — not just aesthetic suggestions. It combines two custom-trained CNNs, a Random Forest comfort-scoring model, and K-Means color extraction into a full-stack web application with real, localized furniture pricing.
 
-
-[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://html.spec.whatwg.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://javascript.com)
+Unlike commercial platforms (Coohom, Planner 5D, Houzz, Interior AI), SpaceCraft discloses its real, evaluated model accuracy to the user and quantifies a room's *functional usability* — comfort, movement efficiency, layout balance, and crowdedness — not just how a design looks.
 
 ---
-</div>
 
-## 🎯 Overview
-The Library Management System is a comprehensive web application designed to streamline library operations across three distinct user roles. Built with modern web technologies, it provides an intuitive interface for managing books, users, and borrowing activities.
+## Table of Contents
 
-## ✨ Features
-### 🎓 Student Portal
-| Feature | Description |
-|---------|-------------|
-| **Book Search & Browse** | Fast and accurate catalogue search with advanced filters |
-| **Borrowing Management** | Easy book borrowing and return processes |
-| **Personal Dashboard** | View borrowing history, current loans, and due dates |
-| **Notifications** | Receive alerts for due dates and library announcements |
-
-### 👩‍💼 Librarian Portal
-| Feature | Description |
-|---------|-------------|
-| **Book Management** | Add, update, remove, and categorize book records |
-| **User Administration** | Manage student accounts and borrowing privileges |
-| **Transaction Processing** | Handle book issuing and returning operations |
-| **Records Maintenance** | Comprehensive borrowing history and overdue tracking |
-| **Reporting Tools** | Generate reports on library usage and inventory |
-
-### ⚙️ Admin Portal
-| Feature | Description |
-|---------|-------------|
-| **System Oversight** | Monitor overall library system performance |
-| **Staff Management** | Create and manage librarian accounts |
-| **Configuration** | System settings and parameter adjustments |
-| **Analytics Dashboard** | Advanced reporting and usage analytics |
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Model Performance](#model-performance)
+- [Screenshots](#screenshots)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [API Documentation](#api-documentation)
+- [Testing](#testing)
+- [Docker](#docker)
+- [Deployment](#deployment)
+- [Roadmap](#roadmap)
+- [Known Limitations](#known-limitations)
+- [License](#license)
 
 ---
-## 📸 System Dashboards
 
-### 🎓 Student Dashboard
-<div align="center">
-<img src="images/454shots_so.png" alt="Student Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
+## Features
 
-### 👩‍💼 Librarian Dashboard
-<div align="center">
-<img src="images/580shots_so.png" alt="Librarian Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
+- 🔐 **Secure authentication** — JWT-based, bcrypt-hashed passwords
+- 📸 **Room photo upload** — with budget, lifestyle, and style preferences
+- 🧠 **Room type classification** — custom-trained CNN (94.1% validation accuracy)
+- 🎨 **Interior style classification** — custom-trained CNN (86.1% validation accuracy)
+- 📐 **Space optimization scoring** — comfort, crowdedness, movement efficiency, layout balance (Random Forest, R² 0.97)
+- 🎨 **Real dominant color extraction** — K-Means clustering with genuine per-color percentages
+- 🛋️ **Personalized recommendations** — real, sourced LKR pricing, matched to your stated budget
+- 📊 **Dashboard** — history and aggregate statistics with charts
+- 📄 **PDF/print export** — download a full analysis report
+- ✅ **Fully tested** — 17 automated tests, CI pipeline on every push
+- 🐳 **Containerized** — Docker Compose for one-command local deployment
 
-### ⚙️ Admin Dashboard
-<div align="center">
-<img src="images/467shots_so.png" alt="Admin Dashboard" width="800" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
+## Tech Stack
 
-<table>
-<tr>
-<td width="10%">
+**Frontend**
+- React (Vite), React Router
+- Chart.js, jsPDF + html2canvas
+- Custom design system (no UI framework)
 
-### 📋 PREREQUISITES CHECKLIST
+**Backend**
+- FastAPI, SQLAlchemy, SQLite
+- JWT authentication, bcrypt
 
-```yaml
-🔧 System Requirements:
-  ├── 💻 Windows OS
-  ├── 🌐 WAMP Server 3.0+
-  ├── 🐘 PHP 7.4+
-  ├── 🗄️ MySQL 5.7+
-  ├── 🌍 Modern Web Browser
-  └── 💾 500MB+ Storage
+**Machine Learning**
+- TensorFlow / Keras — MobileNetV2 transfer learning (both CNNs)
+- scikit-learn — Random Forest (comfort scoring), K-Means (color extraction)
+- OpenCV — feature extraction
+
+**DevOps**
+- Git / GitHub, GitHub Actions (CI/CD)
+- Docker, Docker Compose
+- Deployed via GitHub Pages (frontend) + Render / FastAPI Cloud (backend)
+
+## Model Performance
+
+| Model | Task | Result | Notes |
+|---|---|---|---|
+| Room Classifier | 3-class CNN (bedroom/kitchen/living_room) | **94.1%** validation accuracy | Trained on 3,308 real images |
+| Style Classifier | 2-class CNN (contemporary/industrial) | **86.1%** validation accuracy | Redesigned from an original 50.6% (4-class) result via confusion matrix analysis — see [training README](backend/app/ml/training/README.md) |
+| Comfort Model | Random Forest Regressor | **R² 0.97** | Trained on OpenCV-extracted spatial features |
+| Color Extraction | K-Means Clustering | Unsupervised | Runs live per image, real pixel-proportion percentages |
+
+All models are genuinely trained (not third-party APIs) and their real, honest accuracy is disclosed — including a documented negative result (a fine-tuning experiment that reduced accuracy to 38.0%) that directly informed the final model design.
+
+## Screenshots
+
+> Add real screenshots to a `docs/screenshots/` folder and reference them here, e.g.:
+> ```markdown
+> ![Analysis Results](docs/screenshots/results.png)
+> ![Dashboard](docs/screenshots/dashboard.png)
+> ```
+
+## Project Structure
+
+```
+spacecraft/
+├── backend/
+│   ├── app/
+│   │   ├── api/            # auth, upload, predict, recommend, dashboard routes
+│   │   ├── models/          # SQLAlchemy: User, Upload, Prediction
+│   │   ├── schemas/         # Pydantic request/response schemas
+│   │   ├── services/        # auth_service, recommendation_engine
+│   │   └── ml/
+│   │       ├── room_classifier.py
+│   │       ├── style_predictor.py
+│   │       ├── comfort_model.py
+│   │       ├── color_extractor.py
+│   │       ├── models/       # trained .h5 / .pkl (gitignored)
+│   │       └── training/      # training scripts + README
+│   ├── tests/                  # pytest suite
+│   ├── Dockerfile
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── pages/               # Login, Register, Upload, Dashboard, History, About
+│   │   ├── components/           # Navbar, Footer, StatRing, RecommendationTable, etc.
+│   │   ├── context/                # AuthContext
+│   │   └── api/                     # backend API client
+│   ├── Dockerfile
+│   └── package.json
+├── .github/workflows/           # CI and deployment pipelines
+├── docker-compose.yml
+└── README.md
 ```
 
-</td>
-</tr>
-</table>
+## Getting Started
 
-## 📁 Project Architecture
+### Prerequisites
+- Python 3.10 or 3.11
+- Node.js 18 or 20 LTS
+- Git
 
-```
-📦 librarymanagementsystem/
-├──  admin_dashboard.php             # Admin portal files
-├── librarian_dashboard.php          # Librarian portal files  
-├── student_dashboard.php            # Student portal files
-├──  pages/ 
-│   ├── index.css                    # Common CSS files
-│   └── assets/                      # CSS files
-├── 🔧 login.php                     # Login and authentication
-├── 🔐 logout.php                    # Logout script
-├── 📂 register.php                  # User registration
-├── 📜 README.md                     # Project documentation
-├── 🗄️ database/                     # Database files
-|         |__ libraryms.sql          # Database connection script
-├── config.php                       # Configuration files
-└── 🏠 index.php                     # Main entry point
-└──  admin.js                       # Admin-specific scripts
-└──  librarian.js                    # Librarian-specific scripts
-└──  main.js                        # Common scripts
-```
-
-### ⚡ Installation Steps
-
-
-<b>Step 1: WAMP Server Setup</b>
+### Backend Setup
 
 ```bash
-# Download WAMP Server from official website
-# 🌐 Visit: http://www.wampserver.com/
-# 📥 Download and install WAMP64
-# ▶️ Start WAMP Server
-# 🟢 Wait for green icon (all services running)
+cd backend
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+cp .env.example .env
+python -m app.ml.training.train_comfort_model    # trains the comfort model (fast, ~seconds)
+uvicorn app.main:app --reload --port 8000
 ```
+Visit `http://localhost:8000/docs` for interactive API documentation.
 
-
-<b>Step 2: Setup Project</b>
+### Frontend Setup
 
 ```bash
-# 📋 Copy project to WAMP directory
-# Default path: C:\wamp64\www\librarymanagementsystem\
-
-# 🗄️ Setup Database
-# 1. Open phpMyAdmin: http://localhost/phpmyadmin
-# 2. Create database: libraryms
-# 3. Import SQL file (if available)
+cd frontend
+npm install
+cp .env.example .env
+npm run dev
 ```
-### 3. Project Deployment
-1. Copy the project folder to WAMP's `www` directory:
-   ```
-   C:\wamp64\www\librarymanagementsystem\
-   ```
-2. Ensure all files are properly placed in the directory
+Visit `http://localhost:5173`.
 
-### 4. Configuration
-1. Update database connection settings in `config/database.php`:
-   ```php
-   $host = "localhost";
-   $username = "root";
-   $password = "";
-   $database = "libraryMS";
-   ```
+### Training the Real CNNs (optional)
 
-## 🌐 Running the Application
+The room and style classifiers use a heuristic fallback until trained. See [`backend/app/ml/training/README.md`](backend/app/ml/training/README.md) for full instructions on sourcing datasets and training on Google Colab (free GPU).
 
-1. Start WAMP Server
-2. Open your web browser
-3. Navigate to: `http://localhost/librarymanagementsystem/`
-4. Use the appropriate login credentials for your role
+## API Documentation
 
-## 🔐 Default Login Credentials
+Interactive Swagger docs are available at `/docs` once the backend is running. Summary:
 
-### Administrator Access
-- **Email**: admin@gmail.com
-- **Password**: password
-- **Portal**: Admin Dashboard
+| Method | Endpoint | Auth | Purpose |
+|---|---|---|---|
+| POST | `/api/auth/register` | No | Create a new account |
+| POST | `/api/auth/login` | No | Authenticate, receive a JWT |
+| GET | `/api/auth/me` | Yes | Current user profile |
+| POST | `/api/upload` | Yes | Upload a room image + preferences |
+| POST | `/api/predict/{upload_id}` | Yes | Run the full ML pipeline |
+| GET | `/api/recommend/{prediction_id}` | Yes | Get recommendations |
+| GET | `/api/dashboard/history` | Yes | Past predictions |
+| GET | `/api/dashboard/summary` | Yes | Aggregate statistics |
 
-### Librarian Access
-- **Email**: librarian@gmail.com
-- **Password**: 12345678
-- **Portal**: Librarian Dashboard
+## Testing
 
-### Student Access
-- **Email**: student@gmail.com
-- **Password**: 12345678
-- **Portal**: Student Dashboard
----
-## 🐛 Known Issues & Limitations
+```bash
+cd backend
+python -m pytest tests/ -v
+```
+17 automated tests covering authentication and the recommendation engine's budget-matching logic (including a regression test for a real bug found and fixed during development). A GitHub Actions workflow runs this suite, plus a frontend build check, on every push.
 
-- **Online Book Reservations Unavailable**: The system currently lacks functionality for students to pre-book library materials through the web interface.
+## Docker
 
-- **Notification System Missing**: Automatic messaging capabilities for due date reminders and overdue book alerts via email or SMS have not been implemented.
+```bash
+docker compose up --build
+```
+Backend: `http://localhost:8000` · Frontend: `http://localhost:5173`
 
-- **XAMPP Local Environment Only**: System operates exclusively on local XAMPP server infrastructure without cloud-based or internet deployment options.
+## Deployment
 
-- **Web-Only Interface**: No dedicated mobile application exists; system lacks mobile device optimization features.
+- **Frontend:** deployed to GitHub Pages, auto-redeployed via GitHub Actions on every push
+- **Backend:** deployed via [Render](https://render.com) or [FastAPI Cloud](https://fastapicloud.com), connected to this repository
 
-- **Performance Limitations at Scale**: Architecture targets small to medium educational library environments; may experience degraded performance with extensive data volumes.
+## Roadmap
 
-- **Standard Security Implementation**: While password encryption is active, enhanced security measures such as Two-Factor Authentication remain unimplemented.
+- [ ] Source training data for the "office" room type and "luxury" style categories
+- [ ] Validate comfort scores against real human ratings (current model uses synthetic training labels)
+- [ ] Lightweight object detection for furniture-level inventory
+- [ ] Persistent cloud database (migrate from SQLite)
+- [ ] Full WCAG accessibility audit
+- [ ] Internationalization (i18n) support
 
-- **English-Only User Interface**: System provides exclusively English language support, potentially creating accessibility barriers for non-English speaking users.
+## Known Limitations
 
-- **Basic Report Generation**: System offers fundamental borrowing and overdue item reports; comprehensive analytical tools and advanced reporting features are not available.
----
+- Room classifier covers 3 of 4 originally-proposed categories (office not yet supported)
+- Style classifier covers 2 of 5 originally-proposed categories — consolidated from 5 to 2 based on confusion matrix evidence showing the original categories weren't reliably distinguishable (see [training README](backend/app/ml/training/README.md))
+- Comfort model is trained on synthetic labels (no public "room comfort" ground-truth dataset exists) — a documented, honest limitation, not a bug
+- SQLite database does not persist across restarts on some free-tier hosting platforms
 
-<div align="center">
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=36BCF7&center=true&vCenter=true&width=435&lines=Thank+you+for+visiting!;Happy+Coding!+%F0%9F%9A%80;" alt="Typing SVG" />
-</div>
+## License
+
+This project was developed as a final year academic project. [Add your chosen license here, e.g. MIT.]
+
+## Acknowledgments
+
+- Room dataset: [emanhamed/Houses-dataset](https://github.com/emanhamed/Houses-dataset) (Ahmed & Moustafa, 2016)
+- Room dataset: [Kaggle - Indoor Scenes CVPR 2019](https://www.kaggle.com/datasets/itsahmad/indoor-scenes-cvpr-2019)
+- Style dataset: [Roboflow Universe - Interiordesign](https://universe.roboflow.com/class-qq9at/interiordesign) (CC BY 4.0)
+- Furniture pricing: [Damro](https://damro.lk), Sri Lanka
