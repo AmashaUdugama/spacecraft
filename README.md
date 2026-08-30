@@ -74,11 +74,9 @@ All models are genuinely trained (not third-party APIs) and their real, honest a
 
 ## Screenshots
 
-> Add real screenshots to a `docs/screenshots/` folder and reference them here, e.g.:
-> ```markdown
-> ![Analysis Results][(https://github.com/AmashaUdugama/spacecraft/blob/main/docs/screenshots/results.png)]
-> ![Dashboard](docs/screenshots/dashboard.png)
-> ```
+![Dashboard](docs/screenshots/dashboard.png)
+![Results](docs/screenshots/results.png)
+![Architecture Diagram](docs/screenshots/1_Architecture_Diagram.png)
 
 ## Project Structure
 
