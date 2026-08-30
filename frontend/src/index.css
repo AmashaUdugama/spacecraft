@@ -439,6 +439,21 @@ h3 { font-family: var(--font-display); font-weight: 600; }
 }
 .stat-sub { font-size: 0.78rem; color: var(--text-muted); }
 
+/* Text-based stat values (e.g. "Most common room/style") can be long words
+   that can't break — wrap them onto up to 2 lines instead of overflowing. */
+.stat-value-text {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.28;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ---------- Color swatches ---------- */
 .swatch-row { display: flex; gap: 10px; flex-wrap: wrap; }
 

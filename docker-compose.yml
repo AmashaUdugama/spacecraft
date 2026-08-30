@@ -1,0 +1,36 @@
+services:
+  backend:
+    build: ./backend
+    container_name: spacecraft-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist the database and uploaded images across container restarts
+      - backend_data:/app/data
+      - ./backend/uploads:/app/uploads
+      # Mount trained model files from your host if you have them - lets you
+      # update room_classifier.h5 / style_predictor.h5 without rebuilding
+      - ./backend/app/ml/models:/app/app/ml/models
+    environment:
+      - DATABASE_URL=sqlite:///./data/spacecraft.db
+      - SECRET_KEY=change-this-to-a-long-random-string-before-real-deployment
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - UPLOAD_DIR=./uploads
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Change this if the backend will be reachable at a different
+        # address in your deployment (e.g. a real domain, not localhost)
+        VITE_API_BASE_URL: http://localhost:8000
+    container_name: spacecraft-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_data:

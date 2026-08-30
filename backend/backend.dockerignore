@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.env
+spacecraft.db
+uploads/*
+!uploads/.gitkeep
+app/ml/training/datasets/
+tests/
+.pytest_cache/
+*.log

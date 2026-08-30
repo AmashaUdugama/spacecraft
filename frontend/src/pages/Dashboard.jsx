@@ -104,11 +104,11 @@ export default function Dashboard() {
         <CountStat label="Styles detected" value={styleCount} />
         <div className="stat-card">
           <span className="stat-label">Most common room</span>
-          <span className="stat-value">{topRoom ? topRoom[0].replace("_", " ") : "—"}</span>
+          <span className="stat-value stat-value-text">{topRoom ? topRoom[0].replace("_", " ") : "—"}</span>
         </div>
         <div className="stat-card">
           <span className="stat-label">Most common style</span>
-          <span className="stat-value">{topStyle ? topStyle[0] : "—"}</span>
+          <span className="stat-value stat-value-text">{topStyle ? topStyle[0] : "—"}</span>
         </div>
       </div>
 

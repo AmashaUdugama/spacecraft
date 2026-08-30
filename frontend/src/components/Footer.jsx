@@ -14,7 +14,7 @@ export default function Footer() {
           <Link to="/dashboard">Dashboard</Link>
         </div>
         <div className="footer-meta">
-          &copy; {new Date().getFullYear()} SpaceCraft &middot; Final Year Project &middot; BSc (Hons) Software Engineering
+          &copy; {new Date().getFullYear()} SpaceCraft
         </div>
       </div>
     </footer>
