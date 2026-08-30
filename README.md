@@ -76,7 +76,7 @@ All models are genuinely trained (not third-party APIs) and their real, honest a
 
 ![Dashboard](docs/screenshots/dashboard.png)
 ![Results](docs/screenshots/results.png)
-![Architecture Diagram](docs/screenshots/1_Architecture_Diagram.png)
+
 
 ## Project Structure
 
@@ -198,7 +198,7 @@ Backend: `http://localhost:8000` · Frontend: `http://localhost:5173`
 
 ## License
 
-This project was developed as a final year academic project. [Add your chosen license here, e.g. MIT.]
+This project was developed as a final year academic project.
 
 ## Acknowledgments
 
